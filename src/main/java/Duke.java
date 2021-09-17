@@ -18,13 +18,12 @@ public class Duke {
         greeting();
         ArrayList<Task> tasks = new ArrayList<Task>();
 
-        if (getDatafromFile("tasks").size() > 0) {
-            tasks = getDatafromFile("tasks");
-            System.out.println("Tasks have been loaded.");
-        } else {
+        tasks = getDatafromFile("tasks");
+        if (tasks.size() == 0) {
             System.out.println("No task can be loaded.");
+        } else {
+            System.out.println("Tasks have been loaded.");
         }
-
 
         Scanner input = new Scanner(System.in);
         while (true) {
@@ -195,6 +194,7 @@ public class Duke {
         while (tasks.size() > 0) {
             tasks.remove(0);
         }
+        
         System.out.println(line
                 + "The list has been cleared. Now the list is empty.\n"
                 + line);
@@ -204,6 +204,10 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<Task>();
         String Path="C:\\Users\\XUEY0013\\Documents\\ip\\src\\main\\" + fileName+ ".txt";
         BufferedReader reader = null;
+        File file = new File(Path);
+        if(!file.exists()) {
+            return new ArrayList<Task>();
+        }
         try {
             FileInputStream fileInputStream = new FileInputStream(Path);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
@@ -260,8 +264,8 @@ public class Duke {
         }
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,false), "UTF-8"));
+            int i = 0;
             for (Task task : tasks) {
-                int i = 0;
                 writer.write(i + 1 + ". " + task.toString());
                 i++;
                 writer.write("\n");
