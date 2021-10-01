@@ -15,7 +15,7 @@ public class Parser {
     }
 
     /**
-     * Parses the input and get the command with required variables
+     * Parses the input and gets the command with required variables
      *
      * @param input Input string from the user
      * @return Command Command class parsed from the input
